@@ -1,4 +1,9 @@
 resource "aws_instance" "bastion-eu-west1a" {
+  connection {
+    user     = "ec2-user"
+    key_file = "${aws_key_pair.terraform.key_file}"
+  }
+
   ami               = "ami-70edb016"
   availability_zone = "eu-west-1a"
   instance_type     = "t2.micro"
@@ -18,6 +23,11 @@ resource "aws_eip" "bastion-eu-west1a-eip" {
 }
 
 resource "aws_instance" "bastion-eu-west1b" {
+  connection {
+    user     = "ec2-user"
+    key_file = "${aws_key_pair.terraform.key_file}"
+  }
+
   ami               = "ami-70edb016"
   availability_zone = "eu-west-1b"
   instance_type     = "t2.micro"
