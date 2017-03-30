@@ -19,7 +19,7 @@ resource "aws_subnet" "public-One" {
   cidr_block              = "${var.public_cidr_block1}"
   map_public_ip_on_launch = true
   depends_on              = ["aws_internet_gateway.default"]
-  availability_zone       = "${var.availability_zone-a}"
+  availability_zone       = "${lookup(var.availability_zone,"primary")}"
 
   tags {
     Name = "Public Subnet One"
@@ -50,7 +50,7 @@ resource "aws_subnet" "public-Two" {
   cidr_block              = "${var.public_cidr_block2}"
   map_public_ip_on_launch = true
   depends_on              = ["aws_internet_gateway.default"]
-  availability_zone       = "${var.availability_zone-b}"
+  availability_zone       = "${lookup(var.availability_zone,"secondary")}"
 
   tags {
     Name = "Public Subnet Two"
@@ -79,7 +79,7 @@ resource "aws_route_table_association" "public-Assoc-Two" {
 resource "aws_subnet" "private-One" {
   vpc_id            = "${aws_vpc.default.id}"
   cidr_block        = "${var.private_cidr_block1}"
-  availability_zone = "${var.availability_zone-a}"
+  availability_zone = "${lookup(var.availability_zone,"primary")}"
 
   tags {
     Name = "Private Subnet One"
@@ -108,7 +108,7 @@ resource "aws_route_table_association" "private-Assoc-One" {
 resource "aws_subnet" "private-Two" {
   vpc_id            = "${aws_vpc.default.id}"
   cidr_block        = "${var.private_cidr_block2}"
-  availability_zone = "${var.availability_zone-b}"
+  availability_zone = "${lookup(var.availability_zone,"secondary")}"
 
   tags {
     Name = "Private Subnet Two"

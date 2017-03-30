@@ -6,27 +6,20 @@ variable "region" {
   default = "eu-west-1"
 }
 
-variable "availability_zone-a" {
-  default = "eu-west-1a"
-}
-
-variable "availability_zone-b" {
-  default = "eu-west-1b"
-}
-
-variable "amazon_amis" {
-  description = "Amazon Linux AMIs"
+variable "availability_zone" {
+  type = "map"
 
   default = {
-    us-west-2 = "ami-b5a7ea85"
+    primary   = "eu-west-1a"
+    secondary = "eu-west-1b"
   }
 }
 
-variable "amazon_nat_amis" {
-  description = "Amazon Linux NAT AMIs"
+variable "amazon_amis" {
+  type = "map"
 
   default = {
-    us-west-2 = "ami-bb69128b"
+    eu-west-1 = "ami-70edb016"
   }
 }
 
